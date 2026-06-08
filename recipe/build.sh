@@ -8,6 +8,11 @@ if [[ "${build_platform}" != "${target_platform}" ]]; then
     EXTRA_CMAKE_ARGS="-DCMAKE_CROSSCOMPILING=FALSE"
 fi
 
+# ppc64le is not a recognized architecture in libultrahdr's intrinsics detection
+if [[ "${target_platform}" == "linux-ppc64le" ]]; then
+    EXTRA_CMAKE_ARGS="${EXTRA_CMAKE_ARGS} -DUHDR_ENABLE_INTRINSICS=OFF"
+fi
+
 cmake -S . -B build -G Ninja \
     ${CMAKE_ARGS} \
     -DCMAKE_CXX_FLAGS="${CXXFLAGS} -include cstdint" \
