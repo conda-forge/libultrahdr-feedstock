@@ -10,7 +10,9 @@ fi
 
 # ppc64le is not a recognized architecture in libultrahdr's intrinsics detection
 if [[ "${target_platform}" == "linux-ppc64le" ]]; then
-    EXTRA_CMAKE_ARGS="${EXTRA_CMAKE_ARGS} -DUHDR_ENABLE_INTRINSICS=OFF"
+    UHDR_ENABLE_INTRINSICS=OFF
+else
+    UHDR_ENABLE_INTRINSICS=ON
 fi
 
 cmake -S . -B build -G Ninja \
@@ -25,12 +27,12 @@ cmake -S . -B build -G Ninja \
     -DUHDR_BUILD_JAVA=OFF \
     -DUHDR_BUILD_PACKAGING=OFF \
     -DUHDR_ENABLE_INSTALL=ON \
-    -DUHDR_ENABLE_INTRINSICS=ON \
     -DUHDR_ENABLE_LOGS=OFF \
     -DUHDR_ENABLE_GLES=OFF \
     -DUHDR_ENABLE_WERROR=OFF \
     -DUHDR_WRITE_ISO=ON \
     -DUHDR_WRITE_XMP=OFF \
+    -DUHDR_ENABLE_INTRINSICS=${UHDR_ENABLE_INTRINSICS} \
     ${EXTRA_CMAKE_ARGS}
 
 cmake --build build --parallel ${CPU_COUNT}
