@@ -1,5 +1,13 @@
 set -ex
 
+# On conda-forge cross-compilation environments, CMAKE_CROSSCOMPILING is set to TRUE
+# by the injected toolchain file, which causes UHDR_ENABLE_INSTALL to be automatically
+# overridden to FALSE inside CMakeLists.txt. Explicitly setting it to FALSE here ensures
+# that the install targets remain enabled.
+if [[ "${build_platform}" != "${target_platform}" ]]; then
+    EXTRA_CMAKE_ARGS="-DCMAKE_CROSSCOMPILING=FALSE"
+fi
+
 cmake -S . -B build -G Ninja \
     ${CMAKE_ARGS} \
     -DCMAKE_CXX_FLAGS="${CXXFLAGS} -include cstdint" \
@@ -17,7 +25,8 @@ cmake -S . -B build -G Ninja \
     -DUHDR_ENABLE_GLES=OFF \
     -DUHDR_ENABLE_WERROR=OFF \
     -DUHDR_WRITE_ISO=ON \
-    -DUHDR_WRITE_XMP=OFF
+    -DUHDR_WRITE_XMP=OFF \
+    ${EXTRA_CMAKE_ARGS}
 
 cmake --build build --parallel ${CPU_COUNT}
 cmake --install build
