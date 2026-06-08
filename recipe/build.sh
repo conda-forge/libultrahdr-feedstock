@@ -11,6 +11,9 @@ fi
 # ppc64le is not a recognized architecture in libultrahdr's intrinsics detection
 if [[ "${target_platform}" == "linux-ppc64le" ]]; then
     UHDR_ENABLE_INTRINSICS=OFF
+    # CMakeLists.txt:68 issues FATAL_ERROR for unknown architectures.
+    # Downgrade to STATUS so cmake continues with ARCH unset (no intrinsics needed).
+    sed -i.bak 's|FATAL_ERROR "Architecture:|STATUS "Architecture:|' CMakeLists.txt
 else
     UHDR_ENABLE_INTRINSICS=ON
 fi
