@@ -1,5 +1,5 @@
 context:
-  version: "1.5.1"
+  version: "2.0.0"
 
 package:
   name: libultrahdr
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/google/libultrahdr/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: 54d3f36c1d2b56ef9b8e63fd3f5fcac56c2c4540f8a56e0cc952f5010d790191
+  sha256: 39a64a17c48f2f8a68b653b76663ab14ce357cb5ca5acaacd89e6bc97d2f409f
 
 build:
   number: 0
