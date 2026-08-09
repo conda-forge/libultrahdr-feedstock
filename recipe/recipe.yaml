@@ -20,6 +20,7 @@ requirements:
     - cmake
     - ninja
   host:
+    - libheif
     - libjpeg-turbo
   run_exports:
       # upstream does not follow ABI stability conventions:
