@@ -20,7 +20,7 @@ requirements:
     - cmake
     - ninja
   host:
-    - libheif
+    # - libheif  # Version that libultrahdr requires doesn't exist on conda-forge 
     - libjpeg-turbo
   run_exports:
       # upstream does not follow ABI stability conventions:
