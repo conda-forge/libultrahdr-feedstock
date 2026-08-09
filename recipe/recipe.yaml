@@ -10,7 +10,7 @@ source:
   sha256: 39a64a17c48f2f8a68b653b76663ab14ce357cb5ca5acaacd89e6bc97d2f409f
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -20,6 +20,7 @@ requirements:
     - cmake
     - ninja
   host:
+    # - libheif  # Version that libultrahdr requires doesn't exist on conda-forge 
     - libjpeg-turbo
   run_exports:
       # upstream does not follow ABI stability conventions:
